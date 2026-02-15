@@ -9,12 +9,8 @@ def race():
     counter=local_counter
     
 if __name__ == "__main__":
-    t1=threading.Thread(target=race)
-    t2=threading.Thread(target=race)
+    task=[threading.Thread(target=race) for _ in range(2)]
+    for n in task: n.start()
+    for n in task: n.join()
     
-    t1.start()
-    t2.start()
-    t1.join()
-    t2.join()
-    
-    print(f"Counter value is : {counter}")
+    print(f"Counter value is : {counter} \nbut expected output is 2")
